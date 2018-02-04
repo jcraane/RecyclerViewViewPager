@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
-import android.support.v7.widget.RecyclerView
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.subscriptions.CompositeSubscription
 
@@ -13,18 +12,14 @@ class MainActivity : AppCompatActivity() {
 
     val compositeSubscription: CompositeSubscription = CompositeSubscription()
     lateinit var scrollListener: ScrollListener
-    lateinit var currentPage: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.adapter = PagerAdapter(listOf("Page 1", "Page 2", "Page 3"))
-
-        currentPage = findViewById<TextView>(R.id.currentPage)
         scrollListener = ScrollListener(recyclerView.layoutManager as LinearLayoutManager)
         recyclerView.addOnScrollListener(scrollListener)
     }
