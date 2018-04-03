@@ -23,9 +23,7 @@ class PagerAdapter(private val items: List<String>) : RecyclerView.Adapter<Pager
         holder?.pageName?.text = items.get(position)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 
     class PageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pageName: TextView = itemView.findViewById(R.id.name)
